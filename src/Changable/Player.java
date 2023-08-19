@@ -3,18 +3,17 @@ package Changable;
 public class Player {
 
 	String name, position;
-	int age, physical, mental, technical, keeper, totalPower;
-
+	int age;
+	double technical, physical, mental, totalPower;
 	PlayersFeatures features;
 
-	Player(String name, int age, int physical, int mental, int techincal, int keeper, int totalPower, String position,
+	Player(String name, int age, double physical, double mental, double techincal, double totalPower, String position,
 			PlayersFeatures features) {
 		this.name = name;
 		this.age = age;
 		this.physical = physical;
 		this.mental = mental;
 		this.technical = techincal;
-		this.keeper = keeper;
 		this.totalPower = totalPower;
 		this.position = position;
 		this.features = features;
@@ -22,10 +21,10 @@ public class Player {
 
 	@Override
 	public String toString() {
-		return name + "  " + (age < 10 ? " " : "") + age + "      " + (physical < 10 ? " " : "") + physical + "        "
-				+ (mental < 10 ? " " : "") + mental + "        " + (technical < 10 ? " " : "") + technical + "         "
-				+ (keeper < 10 ? " " : "") + keeper + "         " + (totalPower < 10 ? " " : "") + totalPower
-				+ "         " + position.toString();
+		return name + "  " + (age < 10 ? " " : "") + age + "    " + (physical < 10 ? " " : "")
+				+ String.format("%.2f", physical) + "      " + (mental < 10 ? " " : "") + String.format("%.2f", mental)
+				+ "      " + (technical < 10 ? " " : "") + String.format("%.2f", technical) + "       "
+				+ (totalPower < 10 ? " " : "") + String.format("%.2f", totalPower) + "      " + position.toString();
 	}
 
 //	public int generatePower(int x, int y) {
@@ -79,9 +78,7 @@ class PlayersFeatures {
 
 		@Override
 		public String toString() {
-//			return Corners + " " + Crossing + " " + Dribbling + " " + Finishing + " " + FirstTouch + " "
-//					+ FreeKickTaking + " " + Heading + " " + LongShots + " " + LongThrows + " " + Marking + " "
-//					+ Passing + " " + PenaltyTaking + " " + Tackling + " " + Technique;
+
 			return (Corners < 10 ? "  " : " ") + Corners + "   " + (Crossing < 10 ? "  " : " ") + Crossing + "   "
 					+ (Dribbling < 10 ? "  " : " ") + Dribbling + "   " + (Finishing < 10 ? "  " : " ") + Finishing
 					+ "   " + (FirstTouch < 10 ? "  " : " ") + FirstTouch + "   " + (FreeKickTaking < 10 ? "  " : " ")
@@ -90,6 +87,18 @@ class PlayersFeatures {
 					+ "   " + (Marking < 10 ? "  " : " ") + Marking + "   " + (Passing < 10 ? "  " : " ") + Passing
 					+ "   " + (PenaltyTaking < 10 ? "  " : " ") + PenaltyTaking + "   " + (Tackling < 10 ? "  " : " ")
 					+ Tackling + "   " + (Technique < 10 ? " " : "") + Technique;
+
+			// Bu alttaki yarım kod nasıl sorunsuz çalışıyor amk ?????
+			// Geri kalanını yazdırmıyor yüksek iht ki çalışıyor gibi görünüyor
+
+//		@Override
+//		public String toString() {
+//			return formatStat(Corners) + "   " + formatStat(Crossing) + "   " + formatStat(Dribbling) + "   "
+//					+ formatStat(Finishing) + "   " + formatStat(FirstTouch) + "   " + formatStat(FreeKickTaking);
+//		}
+//
+//		public String formatStat(int stat) {
+//			return (stat < 10 ? "  " : " ") + stat;
 		}
 	}
 

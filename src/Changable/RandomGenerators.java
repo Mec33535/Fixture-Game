@@ -8,14 +8,14 @@ public class RandomGenerators {
 	Random random = new Random();
 
 	// Burası 20 ile x arasında bir sayı döner
-	public int generateRandomNumber(int x) {
+	private int generateRandomNumber(int x) {
 		int randomNumber;
 		randomNumber = random.nextInt(21 - (x + 1)) + x + 1;
 		return randomNumber;
 	}
 
 //----------------------------------------------------------------
-	public String generateRandomString() {
+	private String generateRandomString() {
 		String abc = " ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 		int lenght = 5;
 		StringBuilder sBuilder = new StringBuilder();
@@ -28,17 +28,14 @@ public class RandomGenerators {
 	}
 
 //----------------------------------------------------------------
-	public ArrayList<Team> generatele() {
-
-		Player p = new Player(null, 0, 0, 0, 0, 0, 0, null, null);
-		Team t = new Team(null, 0, 0, 0, 0, 0, null);
+	public ArrayList<Team> generateTeam() {
 
 		ArrayList<Team> teamArraylist = new ArrayList<>();
 
 		for (int j = 0; j < 18; j++) {
 //			Buraya teker teker güç ortalamaları eklenecek
-			t = new Team(generateRandomString(), generateRandomNumber(0), generateRandomNumber(0),
-					generateRandomNumber(0), generateRandomNumber(0), generateRandomNumber(0), generateTeams());
+			Team t = new Team(generateRandomString(), generateRandomNumber(0), generateRandomNumber(0),
+					generateRandomNumber(0), generateRandomNumber(0), generateRandomNumber(0), generatePlayers());
 
 			teamArraylist.add(t);
 		}
@@ -46,29 +43,24 @@ public class RandomGenerators {
 	}
 
 //----------------------------------------------------------------
-	public ArrayList<Player> generateTeams() {
+	public ArrayList<Player> generatePlayers() {
 
 		ArrayList<Player> playersArraylist = new ArrayList<>();
 
 		for (int i = 0; i < 25; i++) {
 			PlayersFeatures features = new PlayersFeatures();
 
-			int age = 19, physical = 0, mental = 0, technical = 0, keeper = 0;
+			int age = 19;
 			String position = null;
 
 			if (i < 6) {
 				position = "Hücum";
-//				features.technical.Corners = 0;
-
 			} else if (i < 12) {
 				position = "OrtaSaha";
-
 			} else if (i < 22) {
 				position = "Savunma";
-
 			} else if (i < 25) {
 				position = "Kale";
-
 			}
 
 //			for (Field field : features.technical.getClass().getDeclaredFields()) {
@@ -104,14 +96,14 @@ public class RandomGenerators {
 //				}
 //			}
 
-			Object[] fieldsToSet = { features.physical, features.mental, features.technical };
+			Object[] featureArray = { features.physical, features.mental, features.technical };
 
-			for (Object fieldContainer : fieldsToSet) {
-				for (Field field : fieldContainer.getClass().getDeclaredFields()) {
+			for (Object fArrays : featureArray) {
+				for (Field field : fArrays.getClass().getDeclaredFields()) {
 					if (field.getType() == int.class) {
 						try {
 							int randomValue = generateRandomNumber(10);
-							field.set(fieldContainer, randomValue);
+							field.set(fArrays, randomValue);
 						} catch (IllegalAccessException e) {
 							e.printStackTrace();
 						}
@@ -192,22 +184,99 @@ public class RandomGenerators {
 
 			}
 			if (position == "Kale") {
+				features.technical.FreeKickTaking = generateRandomNumber(0);
+				features.technical.PenaltyTaking = generateRandomNumber(0);
+
+				features.mental.Aggression = generateRandomNumber(0);
+				features.mental.Flair = generateRandomNumber(0);
+				features.mental.OfftheBall = generateRandomNumber(0);
+				features.mental.Vision = generateRandomNumber(0);
+
+				features.physical.Acceleration = generateRandomNumber(0);
+				features.physical.Pace = generateRandomNumber(0);
+
 //				features.technical.Corners = generateRandomNumber(19);
 //				features.technical.Corners
 			}
+//			int totalTech = 0;
+//			for (Field field : features.technical.getClass().getDeclaredFields()) {
+//				if (field.getType() == int.class) {
+//					try {
+//						int value = field.getInt(features.technical);
+//						totalTech += value;
+//					} catch (IllegalAccessException e) {
+//						e.printStackTrace();
+//					}
+//				}
+//			}
+//			double techPower = (double) totalTech / 14;
+//--------------------------------------------------------------------------------------
+
+			double playersTechPower = (double) calculateTotalPower(features.technical) / 14;
+			double playersMentalPower = (double) calculateTotalPower(features.mental) / 14;
+			double playersPhysicalPower = (double) calculateTotalPower(features.physical) / 8;
+
+			double playersTotalPower = (double) (playersTechPower + playersMentalPower + playersPhysicalPower) / 3;
 
 			Player oyuncular = new Player(generateRandomString(), generateRandomNumber(age) + generateRandomNumber(0),
-					generateRandomNumber(physical), generateRandomNumber(mental), generateRandomNumber(technical),
-					generateRandomNumber(keeper), 0, position, features);
+					playersPhysicalPower, playersMentalPower, playersTechPower, playersTotalPower, position, features);
 
 			playersArraylist.add(oyuncular);
 		}
 
 		return playersArraylist;
 	}
-}
-// ------------------------------------------------------
 
+// ------------------------------------------------------
+	PlayersFeatures features = new PlayersFeatures();
+
+	private int calculateTotalPower(Object featureObject) {
+		int total = 0;
+
+		for (Field field : featureObject.getClass().getDeclaredFields()) {
+			if (field.getType() == int.class) {
+				try {
+					int value = field.getInt(featureObject);
+					total += value;
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return total;
+	}
+
+//------------------------------------------------------
+
+//	public ArrayList<ArrayList<Team>> createFixture(ArrayList<Team> teamArray) {
+	public void createFixture(ArrayList<Team> teamArray) {
+
+//		ArrayList<Team> arrayExmp = new ArrayList<>();
+
+		for (int i = 1; i < 18; i++) {
+			System.out.println("\n" + i + ". Hafta\n");
+			for (int j = 0; j < 18; j++) {
+
+				System.out.println(j + " -> " + (i + j) % teamArray.size());
+//				 j , (i+j) % teamArray.size();
+			}
+
+		}
+
+	}
+
+	// ------------------------------------------------------
+	protected int theMatch(Team t1, Team t2) {
+		if (t1.attackPower > t2.defencePower) {
+
+			return 0;
+		} else {
+			return 1;
+		}
+
+	}
+}
 //
 //
 //

@@ -15,10 +15,9 @@ public class MainSection {
 	public static void main(String[] args) {
 
 		RandomGenerators x = new RandomGenerators();
-		ArrayList<Player> z = x.generateTeams();
-		PlayersFeatures features = new PlayersFeatures();
+		ArrayList<Player> z = x.generatePlayers();
 
-		ArrayList<Team> teamsArayList = x.generatele();
+		ArrayList<Team> teamsArayList = x.generateTeam();
 
 //		ArrayList<Player> a  = teamsArayList.indexOf(-1);
 		menuMethod();
@@ -34,7 +33,8 @@ public class MainSection {
 			case 1:
 				System.out.println("## GENEL TAKIM GÖSTERİMİ## ");
 				System.out.println();
-				System.out.println("Name | TotalPower | DefencePower | AttackPower | MidfielderPower | FanPower ");
+				System.out.println(
+						"            Name | TotalPower | DefencePower | AttackPower | MidfielderPower | FanPower ");
 
 				for (Object num : teamsArayList) {
 					System.out.println(num);
@@ -62,9 +62,8 @@ public class MainSection {
 						Team choosenTeam = teamsArayList.get(selectedTeamIndexForTeam);
 
 						ArrayList<Player> choosemTeamsPlayers = choosenTeam.players;
-						System.out.println("İsimi: " + choosenTeam.name + " olan rakımın oyuncuları : ");
-						System.out
-								.println("Name | Age | Physical | Mental | Technical | Keeper | TotalPower | Position");
+						System.out.println("İsimi: " + choosenTeam.name + " olan takımın oyuncuları : ");
+						System.out.println("Name | Age | Physical | Mental | Technical  | TotalPower | Position");
 						for (Object num : choosemTeamsPlayers)
 							System.out.println(num);
 
@@ -98,6 +97,7 @@ public class MainSection {
 						break;
 					case '3':
 						System.out.println("Seçenek C seçildi.");
+						x.createFixture(teamsArayList);
 						break;
 					case '9':
 						secondMenu = false;
@@ -114,7 +114,7 @@ public class MainSection {
 			case 2:
 				System.out.println("## ÖRNEK OYUNCULAR MODELİ ## ");
 				System.out.println();
-				System.out.println("Name | Age | Physical | Mental | Technical | Keeper | TotalPower | Position");
+				System.out.println("Name | Age | Physical | Mental | Technical  | TotalPower | Position");
 
 				for (Player num : z) {
 					System.out.println(num);
