@@ -8,9 +8,9 @@ public class RandomGenerators {
 	Random random = new Random();
 
 	// Burası 20 ile x arasında bir sayı döner
-	private int generateRandomNumber(int x) {
+	private int generateRandomNumber(int x, int y) {
 		int randomNumber;
-		randomNumber = random.nextInt(21 - (x + 1)) + x + 1;
+		randomNumber = random.nextInt(x - (y + 1)) + y + 1;
 		return randomNumber;
 	}
 
@@ -33,13 +33,35 @@ public class RandomGenerators {
 		ArrayList<Team> teamArraylist = new ArrayList<>();
 
 		for (int j = 0; j < 18; j++) {
-//			Buraya teker teker güç ortalamaları eklenecek
-			Team t = new Team(generateRandomString(), generateRandomNumber(0), generateRandomNumber(0),
-					generateRandomNumber(0), generateRandomNumber(0), generateRandomNumber(0), generatePlayers());
 
+//			Buraya teker teker güç ortalamaları eklenecek
+			Team t = new Team(generateRandomString(), 0, 0, 0, generatePlayers());
+			calculateTeamsPower(t);
 			teamArraylist.add(t);
 		}
 		return teamArraylist;
+	}
+
+// ------------------------------------------------------
+	// Bişiler yanlış. Çözemedim
+	public void calculateTeamsPower(Team teamObject) {
+		double totalAttack = 0;
+		double totalDefence = 0;
+		ArrayList<Player> oyuncular = teamObject.players;
+		for (Player num : oyuncular) {
+			if (num.position.equals("Hücum") || num.position.equals("OrtaSaha")) {
+				totalAttack += num.totalPower;
+			} else {
+				totalDefence += num.totalPower;
+			}
+			teamObject.setAttackPower(totalAttack / 12);
+			teamObject.setDefencePower(totalDefence / 13);
+			teamObject.setTotalPower((totalAttack + totalDefence) / 25);
+
+		}
+
+//		return total / 12;
+
 	}
 
 //----------------------------------------------------------------
@@ -50,7 +72,6 @@ public class RandomGenerators {
 		for (int i = 0; i < 25; i++) {
 			PlayersFeatures features = new PlayersFeatures();
 
-			int age = 19;
 			String position = null;
 
 			if (i < 6) {
@@ -102,7 +123,7 @@ public class RandomGenerators {
 				for (Field field : fArrays.getClass().getDeclaredFields()) {
 					if (field.getType() == int.class) {
 						try {
-							int randomValue = generateRandomNumber(10);
+							int randomValue = generateRandomNumber(21, 10);
 							field.set(fArrays, randomValue);
 						} catch (IllegalAccessException e) {
 							e.printStackTrace();
@@ -151,49 +172,49 @@ public class RandomGenerators {
 //			features.mental.WorkRate = generateRandomNumber(0);
 
 			if (position == "Hücum") {
-				features.technical.Corners = generateRandomNumber(0);
-				features.technical.FreeKickTaking = generateRandomNumber(0);
-				features.technical.LongThrows = generateRandomNumber(0);
-				features.technical.Marking = generateRandomNumber(0);
-				features.technical.Tackling = generateRandomNumber(0);
+				features.technical.Corners = generateRandomNumber(11, 0);
+				features.technical.FreeKickTaking = generateRandomNumber(11, 0);
+				features.technical.LongThrows = generateRandomNumber(11, 0);
+				features.technical.Marking = generateRandomNumber(11, 0);
+				features.technical.Tackling = generateRandomNumber(11, 0);
 
-				features.mental.Leadership = generateRandomNumber(0);
-				features.mental.Positioning = generateRandomNumber(0);
+				features.mental.Leadership = generateRandomNumber(11, 0);
+				features.mental.Positioning = generateRandomNumber(11, 0);
 
 			}
 			if (position == "OrtaSaha") {
-				features.technical.LongThrows = generateRandomNumber(0);
-				features.technical.Marking = generateRandomNumber(0);
+				features.technical.LongThrows = generateRandomNumber(11, 0);
+				features.technical.Marking = generateRandomNumber(11, 0);
 
-				features.mental.Concentration = generateRandomNumber(0);
-				features.mental.WorkRate = generateRandomNumber(0);
+				features.mental.Concentration = generateRandomNumber(11, 0);
+				features.mental.WorkRate = generateRandomNumber(11, 0);
 			}
 			if (position == "Savunma") {
-				features.technical.Corners = generateRandomNumber(0);
-				features.technical.Crossing = generateRandomNumber(0);
-				features.technical.Dribbling = generateRandomNumber(0);
-				features.technical.Finishing = generateRandomNumber(0);
-				features.technical.FreeKickTaking = generateRandomNumber(0);
-				features.technical.LongShots = generateRandomNumber(0);
-				features.technical.LongThrows = generateRandomNumber(0);
-				features.technical.PenaltyTaking = generateRandomNumber(0);
-				features.technical.Technique = generateRandomNumber(0);
+				features.technical.Corners = generateRandomNumber(11, 0);
+				features.technical.Crossing = generateRandomNumber(11, 0);
+				features.technical.Dribbling = generateRandomNumber(11, 0);
+				features.technical.Finishing = generateRandomNumber(11, 0);
+				features.technical.FreeKickTaking = generateRandomNumber(11, 0);
+				features.technical.LongShots = generateRandomNumber(11, 0);
+				features.technical.LongThrows = generateRandomNumber(11, 0);
+				features.technical.PenaltyTaking = generateRandomNumber(11, 0);
+				features.technical.Technique = generateRandomNumber(11, 0);
 
-				features.mental.Flair = generateRandomNumber(0);
-				features.mental.OfftheBall = generateRandomNumber(0);
+				features.mental.Flair = generateRandomNumber(11, 0);
+				features.mental.OfftheBall = generateRandomNumber(11, 0);
 
 			}
 			if (position == "Kale") {
-				features.technical.FreeKickTaking = generateRandomNumber(0);
-				features.technical.PenaltyTaking = generateRandomNumber(0);
+				features.technical.FreeKickTaking = generateRandomNumber(11, 0);
+				features.technical.PenaltyTaking = generateRandomNumber(11, 0);
 
-				features.mental.Aggression = generateRandomNumber(0);
-				features.mental.Flair = generateRandomNumber(0);
-				features.mental.OfftheBall = generateRandomNumber(0);
-				features.mental.Vision = generateRandomNumber(0);
+				features.mental.Aggression = generateRandomNumber(11, 0);
+				features.mental.Flair = generateRandomNumber(11, 0);
+				features.mental.OfftheBall = generateRandomNumber(11, 0);
+				features.mental.Vision = generateRandomNumber(11, 0);
 
-				features.physical.Acceleration = generateRandomNumber(0);
-				features.physical.Pace = generateRandomNumber(0);
+				features.physical.Acceleration = generateRandomNumber(11, 0);
+				features.physical.Pace = generateRandomNumber(11, 0);
 
 //				features.technical.Corners = generateRandomNumber(19);
 //				features.technical.Corners
@@ -212,14 +233,14 @@ public class RandomGenerators {
 //			double techPower = (double) totalTech / 14;
 //--------------------------------------------------------------------------------------
 
-			double playersTechPower = (double) calculateTotalPower(features.technical) / 14;
-			double playersMentalPower = (double) calculateTotalPower(features.mental) / 14;
-			double playersPhysicalPower = (double) calculateTotalPower(features.physical) / 8;
+			double playersTechPower = (double) calculatePlayersPower(features.technical) / 14;
+			double playersMentalPower = (double) calculatePlayersPower(features.mental) / 14;
+			double playersPhysicalPower = (double) calculatePlayersPower(features.physical) / 8;
 
 			double playersTotalPower = (double) (playersTechPower + playersMentalPower + playersPhysicalPower) / 3;
 
-			Player oyuncular = new Player(generateRandomString(), generateRandomNumber(age) + generateRandomNumber(0),
-					playersPhysicalPower, playersMentalPower, playersTechPower, playersTotalPower, position, features);
+			Player oyuncular = new Player(generateRandomString(), generateRandomNumber(40, 20), playersPhysicalPower,
+					playersMentalPower, playersTechPower, playersTotalPower, position, features);
 
 			playersArraylist.add(oyuncular);
 		}
@@ -228,9 +249,9 @@ public class RandomGenerators {
 	}
 
 // ------------------------------------------------------
-	PlayersFeatures features = new PlayersFeatures();
+//	PlayersFeatures features = new PlayersFeatures();
 
-	private int calculateTotalPower(Object featureObject) {
+	private int calculatePlayersPower(Object featureObject) {
 		int total = 0;
 
 		for (Field field : featureObject.getClass().getDeclaredFields()) {
@@ -252,29 +273,39 @@ public class RandomGenerators {
 //	public ArrayList<ArrayList<Team>> createFixture(ArrayList<Team> teamArray) {
 	public void createFixture(ArrayList<Team> teamArray) {
 
-//		ArrayList<Team> arrayExmp = new ArrayList<>();
-
-		for (int i = 1; i < 18; i++) {
+		for (int i = 1; i < 36; i++) {
 			System.out.println("\n" + i + ". Hafta\n");
-			for (int j = 0; j < 18; j++) {
+//			String m = null;
+			for (int j = 0; j < 18; ++j) {
 
-				System.out.println(j + " -> " + (i + j) % teamArray.size());
-//				 j , (i+j) % teamArray.size();
+				if (i < 18) {
+					teamArray.get(j).fanPower = true;
+					teamArray.get((i + j) % teamArray.size()).fanPower = false;
+				} else {
+					teamArray.get(j).fanPower = false;
+					teamArray.get((i + j) % 18).fanPower = true;
+				}
+				theMatch(teamArray.get(j), teamArray.get((i + j) % 18));
+				System.out.println(j + " " + Boolean.toString(teamArray.get(j).fanPower) + " -> "
+						+ Boolean.toString(teamArray.get((i + j) % 18).fanPower) + " " + (i + j) % teamArray.size());
+
+//				System.out.println(theMatch(teamArray.get((i + j) % 18), teamArray.get(j)));
 			}
-
 		}
-
 	}
 
 	// ------------------------------------------------------
-	protected int theMatch(Team t1, Team t2) {
-		if (t1.attackPower > t2.defencePower) {
+	public void theMatch(Team t1, Team t2) {
 
-			return 0;
-		} else {
-			return 1;
+		double t1Attack = (t1.attackPower / t2.defencePower);
+		double threshold = 0.8;
+		for (int i = 0; i <= generateRandomNumber((int) t1.attackPower, 0); i++) {
+			if (generateRandomNumber((int) t1Attack, 0) < threshold) {
+				System.out.println("t1'den gol");
+			}
 		}
-
+//		if()
+//		return 0;
 	}
 }
 //

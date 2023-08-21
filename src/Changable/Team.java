@@ -3,31 +3,41 @@ package Changable;
 import java.util.ArrayList;
 
 public class Team {
-
-	Integer totalPower, defencePower, attackPower, midfielderPower, fanPower;
+	boolean fanPower;
+	double totalPower, defencePower, attackPower;
 	String name;
 	ArrayList<Player> players;
 
-	Team(String name, Integer totalPower, Integer defencePower, Integer attackPower, Integer midfielderPower,
-			Integer fanPower, ArrayList<Player> players) {
+	Team(String name, double attackPower, double defencePower, double totalPower, ArrayList<Player> players) {
 		this.name = name;
-		this.totalPower = totalPower;
-		this.defencePower = defencePower;
 		this.attackPower = attackPower;
-		this.fanPower = fanPower;
-		this.midfielderPower = midfielderPower;
+		this.defencePower = defencePower;
+		this.totalPower = totalPower;
 
 		this.players = players;
 	}
 
 	@Override
 	public String toString() {
-		return "Takım adı: " + name + " =>    " + (totalPower < 10 ? " " : "") + totalPower + "            "
-				+ (defencePower < 10 ? " " : "") + defencePower + "              " + (attackPower < 10 ? " " : "")
-				+ attackPower + "            " + (midfielderPower < 10 ? " " : "") + midfielderPower + "            "
-				+ (fanPower < 10 ? " " : "") + fanPower + " ";
+		return "Takım adı: " + name + " =>   " + (totalPower < 10 ? " " : "") + String.format("%.2f", totalPower)
+				+ "         " + (defencePower < 10 ? " " : "") + String.format("%.2f", defencePower) + "         "
+				+ (attackPower < 10 ? " " : "") + String.format("%.2f", attackPower) + "      " + fanPower + " ";
 	}
+
+	public void setAttackPower(double attackPower) {
+		this.attackPower = attackPower;
+	}
+
+	public void setDefencePower(double defencePower) {
+		this.defencePower = defencePower;
+	}
+
+	public void setTotalPower(double totalPower) {
+		this.totalPower = totalPower;
+	}
+
 }
+
 //
 //
 //

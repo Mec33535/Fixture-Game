@@ -19,7 +19,6 @@ public class MainSection {
 
 		ArrayList<Team> teamsArayList = x.generateTeam();
 
-//		ArrayList<Player> a  = teamsArayList.indexOf(-1);
 		menuMethod();
 
 		Scanner scanner = new Scanner(System.in);
@@ -33,8 +32,7 @@ public class MainSection {
 			case 1:
 				System.out.println("## GENEL TAKIM GÖSTERİMİ## ");
 				System.out.println();
-				System.out.println(
-						"            Name | TotalPower | DefencePower | AttackPower | MidfielderPower | FanPower ");
+				System.out.println("            Name | AttackPower | DefencePower | TotalPower | FanPower ");
 
 				for (Object num : teamsArayList) {
 					System.out.println(num);
@@ -112,14 +110,19 @@ public class MainSection {
 				break;
 
 			case 2:
-				System.out.println("## ÖRNEK OYUNCULAR MODELİ ## ");
-				System.out.println();
-				System.out.println("Name | Age | Physical | Mental | Technical  | TotalPower | Position");
+//				System.out.println("## ÖRNEK OYUNCULAR MODELİ ## ");
+//				System.out.println();
+//				System.out.println("Name | Age | Physical | Mental | Technical  | TotalPower | Position");
+//
+//				for (Player num : z) {
+//					System.out.println(num);
+//				}
+//				Team te = new Team(null, choice, choice, choice, choice, z);
 
-				for (Player num : z) {
-					System.out.println(num);
+				for (Team num : teamsArayList) {
+//					num.setAttackPower(x.calculateTeamsPower(num));
+					x.calculateTeamsPower(num);
 				}
-
 				menuMethod();
 
 				break;
@@ -138,4 +141,5 @@ public class MainSection {
 		scanner.close();
 
 	}
+
 }
