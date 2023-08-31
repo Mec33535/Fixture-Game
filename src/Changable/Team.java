@@ -6,6 +6,7 @@ public class Team {
 	boolean fanPower;
 	double totalPower, defencePower, attackPower;
 	String name;
+	int goals, avg, points;
 	ArrayList<Player> players;
 
 	Team(String name, double attackPower, double defencePower, double totalPower, ArrayList<Player> players) {
@@ -34,6 +35,26 @@ public class Team {
 
 	public void setTotalPower(double totalPower) {
 		this.totalPower = totalPower;
+	}
+
+	public void setGoals(int goals) {
+		this.goals = goals;
+	}
+
+	public void setAvg(int avg) {
+		this.avg = avg;
+	}
+
+	public void setPoints(int points) {
+		this.points = points;
+	}
+
+	public int getPoints() {
+		return points;
+	}
+
+	public int getAvg() {
+		return avg;
 	}
 
 }

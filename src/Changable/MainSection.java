@@ -45,8 +45,8 @@ public class MainSection {
 					System.out.println("\n#####---TAKIM MENUSU---#####\n");
 					System.out.println("1--) Takımın Oyuncuları.");
 					System.out.println("2--) Takım Oyuncularının Özellik Tabloları.");
-					System.out.println("3--) Seçenek B");
-					System.out.println("4--) Seçenek C");
+					System.out.println("3--) Detaylı Fixture Çekimi");
+					System.out.println("4--) Puan Tablosu");
 					System.out.println("9--) Ana Menüye Dön");
 					char secondChoice = scanner.next().charAt(0);
 
@@ -94,8 +94,12 @@ public class MainSection {
 
 						break;
 					case '3':
-						System.out.println("Seçenek C seçildi.");
+						System.out.println("DETAYLI FIXTURE ÇEKİMİ.");
 						x.createFixture(teamsArayList);
+						break;
+					case '4':
+						System.out.println("SCOREBOARD");
+						x.theScoreBoard(teamsArayList);
 						break;
 					case '9':
 						secondMenu = false;
